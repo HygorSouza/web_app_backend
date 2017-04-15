@@ -10,6 +10,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		<class>br.usjt.app.servicedesck.model.Fila</class>
 		<class>br.usjt.app.servicedesck.model.Chamado</class>
 		<class>br.usjt.app.servicedesck.model.Usuario</class>
+		<class>br.usjt.app.servicedesck.model.SLA</class>
 		
 		<properties>
 			<!-- dados da conexao foram migrados para o spring-context.xml na configuracao 

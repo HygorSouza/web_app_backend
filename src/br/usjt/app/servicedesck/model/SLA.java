@@ -2,10 +2,30 @@ package br.usjt.app.servicedesck.model;
 
 import java.util.Date;
 
-public class SLA {
-	private Long id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
+@Entity
+public class SLA {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	
+	@NotNull
+	@Temporal(TemporalType.TIME)
 	private Date tempoDeAtendimento;
+	
+	@Min(0)
+	@Max(5)
+	private int nivel;
 
 	public Long getId() {
 		return id;
@@ -21,5 +41,13 @@ public class SLA {
 
 	public void setTempoDeAtendimento(Date tempoDeAtendimento) {
 		this.tempoDeAtendimento = tempoDeAtendimento;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
 	}
 }
