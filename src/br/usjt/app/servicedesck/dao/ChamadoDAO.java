@@ -1,10 +1,13 @@
 package br.usjt.app.servicedesck.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
+
 import br.usjt.app.servicedesck.model.Chamado;
 
 @Repository
@@ -45,5 +48,9 @@ public class ChamadoDAO {
 		return query.getResultList();
 	}
 	
+	public List<Chamado> listarPorPrioridade(){
+		TypedQuery<Chamado> query = manager.createNamedQuery("Chamado.porPrioridade", Chamado.class);
+		return query.getResultList();
+	}
 	
 }

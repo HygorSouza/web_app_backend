@@ -21,7 +21,11 @@ public class SlaDAO {
 		String jpql = "SELECT  s FROM SLA s";
 		Query query = manager.createQuery(jpql);
 		return  query.getResultList();
-	} 
+	}
+	
+	public SLA pesquisar(Long id){
+		return manager.find(SLA.class, id);
+	}
 	
 	
 }

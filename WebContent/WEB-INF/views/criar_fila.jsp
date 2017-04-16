@@ -23,6 +23,17 @@
 					<input type="text" class="form-control" name="nome" required /> <br />
 				</div>
 			</div>
+			
+			<div class="input-group col-md-6">
+				<div class="input-group-addon">
+						<span>Nivel da SLA</span>
+				</div>
+					<select class="form-control" name="sla.id" required >
+						<c:forEach var="sla" items="${slas}">
+							<option value="${sla.id}">${sla.descricao}</option>
+						</c:forEach>
+					</select> 
+				</div>
 
 			<a class="btn btn-default" href="index"> Cancelar</a> <input
 				type="submit" class="btn btn-primary" value="Criar" />

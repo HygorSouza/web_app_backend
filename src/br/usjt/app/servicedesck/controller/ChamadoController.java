@@ -3,12 +3,15 @@ package br.usjt.app.servicedesck.controller;
 
 import java.util.Arrays;
 import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import br.usjt.app.servicedesck.model.Chamado;
 import br.usjt.app.servicedesck.service.ChamadoService;
 import br.usjt.app.servicedesck.service.FilaService;
@@ -63,8 +66,8 @@ public class ChamadoController {
 		else {
 			lista = chamadoService.pesquisar(pesquisa);
 		}
-		
-			model.addAttribute("listaChamado", lista);
+		//lista = chamadoService.listar();
+		model.addAttribute("listaChamado", lista);
 		return "ajax/listar_chamados_ajax";
 	}
 	
@@ -80,6 +83,23 @@ public class ChamadoController {
 		
 			return "teste";
 		}
+		
+//		@RequestMapping("app")
+//		public void test(){
+//			
+////			@RequestParam("id") Long id,@RequestParam("ni") int nivel,HttpServletResponse response
+////			Chamado chamado = chamadoService.consultar(id);
+////			String s = chamadoService.calcularSLA(chamado,nivel);
+////			
+////			try {
+////				PrintWriter out = response.getWriter();
+////				out.print(s);
+////			} catch (IOException e) {
+////				// TODO Auto-generated catch block
+////				e.printStackTrace();
+////			} 
+//			//return "redirect:index";
+//		}
 }
 
 	

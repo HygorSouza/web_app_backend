@@ -38,6 +38,7 @@
 			<br/>
 			
 			<label>Status</label>
+			<label>Status</label>
 			<c:choose>
 				<c:when test="${usuario.ativo == 1}">
 					<input type="checkbox" name="ativo" value="1" placeholder="O usuario pode utilizar o sistema ?" checked="checked" />

@@ -10,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.usjt.app.servicedesck.model.Fila;
 import br.usjt.app.servicedesck.service.FilaService;
+import br.usjt.app.servicedesck.service.SlaService;
 
 @Transactional
 @Controller
 public class FilaController {
 	private FilaService filaService;
+	private SlaService slaService;
 	
 	@Autowired
-	public FilaController(FilaService filaService) {
+	public FilaController(FilaService filaService,SlaService slaService) {
 		this.filaService = filaService;
+		this.slaService = slaService;
 	}
 	
-	
 	@RequestMapping("nova_fila")
-	public String novaFila(){
+	public String novaFila(Model model){
+		model.addAttribute("slas", slaService.listarTodas());
 		return "criar_fila";
 	}
 	

@@ -43,7 +43,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean> -->	
 	
 	  <mvc:interceptors>
-		<bean class="br.usjt.app.servicedesck.controller.LoginInterceptor" />
+		<bean class="br.usjt.app.servicedesck.interceptor.LoginInterceptor" />
 	</mvc:interceptors> 
 	
 </beans>

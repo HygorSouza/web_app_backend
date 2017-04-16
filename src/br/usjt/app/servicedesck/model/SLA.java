@@ -20,6 +20,9 @@ public class SLA {
 	
 	
 	@NotNull
+	private String descricao;
+	
+	@NotNull
 	@Temporal(TemporalType.TIME)
 	private Date tempoDeAtendimento;
 	
@@ -49,5 +52,13 @@ public class SLA {
 
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.usjt.app.servicedesck.dao.UsuarioDAO;
 import br.usjt.app.servicedesck.model.Usuario;
 
+
 @Service
 public class UsuarioService {
 	private UsuarioDAO userDAO;

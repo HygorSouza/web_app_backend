@@ -14,7 +14,14 @@ import javax.validation.constraints.NotNull;
 public class Usuario implements Serializable {
 	@Transient
 	private static final long serialVersionUID = 1L;
-
+	
+	@Transient
+	public static final int SOLUCIONADOR = 1;
+	
+	@Transient
+	public static final int SOLICITANTE = 0;
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

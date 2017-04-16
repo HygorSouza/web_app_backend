@@ -17,7 +17,7 @@
 	<jsp:include page="header.jsp" />
 
 	<div class="container">
-		<form action="criar_chamado">
+		<form action="criar_chamado" method="post">
 
 			<div class="row col-md-12">
 				<div class="form-group col-md-4">

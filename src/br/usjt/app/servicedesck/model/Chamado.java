@@ -8,15 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@NamedQueries(value={
+	@NamedQuery(name="Chamado.porPrioridade",query="SELECT c FROM Chamado c ORDER BY c.fila.sla.nivel , c.dataDeAbertura ASC")
+})
 public class Chamado implements Serializable {
 
-	@Transient
+	//@Transient
 	private static final long serialVersionUID = 1L;
 
 	@Id

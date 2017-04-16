@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.usjt.app.servicedesck.model.Usuario;
 
+
 @Repository
 public class UsuarioDAO {
 	@PersistenceContext
