@@ -2,14 +2,14 @@
  * 
  */
 $(document).ready(function() {
-	$("#consultar_chamado").on("submit", function(event) {
+	$("#pesquisar_fila_status").on("submit", function(event) {
 		
 		event.preventDefault();
 		var dados = $(this).serialize();
 		
 		$.ajax({
 			type : "POST",
-			url : 'consultar_chamado',
+			url : 'pesquisar_fila_status',
 			// dataType:'json',
 			data : dados,
 			success : function(result) {

@@ -12,31 +12,36 @@ import br.usjt.app.servicedesck.service.UsuarioService;
 @Controller
 public class LoginController {
 	private UsuarioService userService;
-	public static final String USUARIO_LOGADO = "br.usjt.app.servicedesck.usuario_logado";
-	
+	public static final String USUARIO_LOGADO = "usuario_logado";
+
 	@Autowired
 	public LoginController(UsuarioService userService) {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value={"","index"})
-	public String index(){
+	@RequestMapping(value = { "index" })
+	public String index() {
 		return "login";
 	}
-	
+
 	@RequestMapping("fazer_login")
-	public String fazerLogin(HttpSession session, Usuario usuario){
-			Boolean retorno;
-			retorno = userService.fazerLogin(usuario);
-			if(retorno == true){
+	public String fazerLogin(HttpSession session, Usuario usuario) {
+		Boolean retorno;
+		retorno = userService.fazerLogin(usuario);
+		if (retorno) {
 			session.setAttribute(USUARIO_LOGADO, usuario);
-			System.out.println(retorno);
-			}else {
-				System.out.println(false);
-				return "redirect:index";
-			}
-		
-		return "index";
+
+			return "index";
+		} else {
+
+			return "login";
+		}
 	}
-	
+
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "login";
+	}
+
 }

@@ -14,7 +14,15 @@
 </head>
 <body>
 
-	<jsp:include page="../header.jsp" />
+		<c:if test="${usuario_logado.tipo eq 2}">
+			<%@ include file="../header_administrador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 1}">
+			<%@ include file="../header_solucionador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 0}">
+			<%@ include file="../header_solicitante.jsp"%>
+		</c:if>
 
 	<%@ include file="modal_excluir_usuario.jsp"%>
 
@@ -39,6 +47,13 @@
 			<div class="col-sm-1">
 				<label>Status:</label>
 			</div>
+			
+			<c:if test="${LoginInterceptor.usuario.getTipo() == 1}">
+									<a href="pesquisar_usuario">Pesquisar Usuario</a>
+			</c:if>
+			<c:if test="${LoginInterceptor.usuario.getTipo() == 0}">
+				<a href="novo_usuario">Novo Usuario</a>
+			</c:if>
 			<div class="col-sm-2">
 				<select class="form-control" name="Tipo" id="Tipo">
 					<option value="0">Solicitante</option>

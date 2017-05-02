@@ -49,7 +49,6 @@ public class FilaDAO {
 	public List<Fila> listarAtivas() {
 		//String jpql = "SELECT fila FROM Fila fila WHERE fila.ativa = true";
 		TypedQuery<Fila> query = manager.createNamedQuery("Fila.listarAtivas",Fila.class);
-		query.setParameter("ativa", true);
 		return query.getResultList();
 	}
 	

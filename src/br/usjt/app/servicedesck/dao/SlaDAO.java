@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +16,10 @@ public class SlaDAO {
 	EntityManager manager;
 	
 	
-	@SuppressWarnings("unchecked")
+
 	public List<SLA> listarTodas(){
-		String jpql = "SELECT  s FROM SLA s";
-		Query query = manager.createQuery(jpql);
+		//String jpql = "SELECT  s FROM SLA s";
+		TypedQuery<SLA> query = manager.createNamedQuery("SLA.listarTodas", SLA.class);
 		return  query.getResultList();
 	}
 	

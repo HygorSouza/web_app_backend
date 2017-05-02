@@ -13,7 +13,16 @@
 	<link href="res/css/style.css" rel="stylesheet"/>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+
+		<c:if test="${usuario_logado.tipo eq 2}">
+			<%@ include file="../header_administrador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 1}">
+			<%@ include file="../header_solucionador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 0}">
+			<%@ include file="../header_solicitante.jsp"%>
+		</c:if>
 	
 	<%@ include file="modal_excluir_fila.jsp" %>
 	

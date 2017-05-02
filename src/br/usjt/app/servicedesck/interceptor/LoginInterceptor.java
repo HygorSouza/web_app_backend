@@ -13,17 +13,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		//String url = request.getRequestURI();
+
+		String uri = request.getRequestURI();
+
+		if (uri.contains("res") || uri.contains("index") || uri.contains("fazer_login")) {
+			return true;
+		}
+
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
-		if( user != null){
-		
+
+		if (user != null) {
+			return true;
+		} else {
+			response.sendRedirect("index");
+			return false;
 		}
-		
-		if(user == null){
-			
-		}
-		return super.preHandle(request, response, handler);
 	}
 }

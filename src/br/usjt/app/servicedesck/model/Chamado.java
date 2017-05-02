@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,11 +18,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries(value={
-	@NamedQuery(name="Chamado.porPrioridade",query="SELECT c FROM Chamado c ORDER BY c.fila.sla.nivel , c.dataDeAbertura ASC")
+	@NamedQuery(name="Chamado.porPrioridade",query="SELECT DISTINCT(cmd) FROM Chamado cmd LEFT JOIN FETCH cmd.fila ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC"),
+	@NamedQuery(name="Chamado.porPrioridadePorSolicitante",query="SELECT cmd FROM Chamado cmd LEFT JOIN FETCH cmd.fila  WHERE cmd.solicitante.id = :idSolicitante ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC")
 })
 public class Chamado implements Serializable {
-
-	//@Transient
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,7 +35,8 @@ public class Chamado implements Serializable {
 	private String descricao;
 
 	@NotNull
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private StatusChamado status;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -45,6 +47,21 @@ public class Chamado implements Serializable {
 	
 	@ManyToOne
 	private Fila fila;
+	
+	
+	@ManyToOne
+	private Usuario solicitante;
+	
+	@ManyToOne
+	private Usuario solucionador;
+	
+	public Usuario getSolucionador() {
+		return solucionador;
+	}
+
+	public void setSolucionador(Usuario solucionador) {
+		this.solucionador = solucionador;
+	}
 
 	public Long getId() {
 		return id;
@@ -54,7 +71,7 @@ public class Chamado implements Serializable {
 		return descricao;
 	}
 
-	public String getStatus() {
+	public StatusChamado getStatus() {
 		return status;
 	}
 
@@ -74,7 +91,7 @@ public class Chamado implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusChamado status) {
 		this.status = status;
 	}
 
@@ -100,6 +117,14 @@ public class Chamado implements Serializable {
 
 	public void setFila(Fila fila) {
 		this.fila = fila;
+	}
+	
+	public Usuario getSolicitante() {
+		return solicitante;
+	}
+
+	public void setSolicitante(Usuario solicitante) {
+		this.solicitante = solicitante;
 	}
 
 }

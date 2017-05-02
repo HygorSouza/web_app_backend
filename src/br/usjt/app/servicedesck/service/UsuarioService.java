@@ -12,7 +12,7 @@ import br.usjt.app.servicedesck.model.Usuario;
 @Service
 public class UsuarioService {
 	private UsuarioDAO userDAO;
-
+	
 	@Autowired
 	public UsuarioService(UsuarioDAO userDAO) {
 		this.userDAO = userDAO;

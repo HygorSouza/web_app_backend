@@ -27,7 +27,7 @@ public class FilaController {
 	@RequestMapping("nova_fila")
 	public String novaFila(Model model){
 		model.addAttribute("slas", slaService.listarTodas());
-		return "criar_fila";
+		return "fila/criar_fila";
 	}
 	
 	@RequestMapping("criar_fila")
@@ -41,20 +41,20 @@ public class FilaController {
 	@RequestMapping("atualizar_fila")
 	public String atualizarFila(@RequestParam("id") Long id,Model model){
 		model.addAttribute("fila", filaService.consultar(id) );
-		return "atualizar_fila";
+		return "fila/atualizar_fila";
 	}
 	
 	@RequestMapping("alterar_fila")
 	public String alterarFila(Fila fila){
 		filaService.atualizar(fila);
-		return "lista_de_filas";
+		return "fila/lista_de_filas";
 	}
 	
 	// pesquisar filas
 	
 	@RequestMapping("lista_de_filas")
 	public String listaDeFila(){
-		return "lista_de_filas";
+		return "fila/lista_de_filas";
 	}
 	
 	@RequestMapping("pesquisar_filas")
@@ -72,7 +72,7 @@ public class FilaController {
 	@RequestMapping("remover_fila")
 	public String removerFila(Fila fila){
 		filaService.excluir(fila);
-		return "lista_de_filas";
+		return "fila/lista_de_filas";
 	}
 	
 }

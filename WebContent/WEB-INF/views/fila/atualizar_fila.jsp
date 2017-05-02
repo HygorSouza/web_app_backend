@@ -4,6 +4,7 @@
 <!DOCTYPE html >
 <html>
 <head>
+<%@page import="br.usjt.app.servicedesck.model.Usuario"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Atualizar Fila</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,15 @@
 </head>
 <body>
 	
-	<jsp:include page="header.jsp"/>
+		<c:if test="${usuario_logado.tipo eq 2}">
+			<%@ include file="../header_administrador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 1}">
+			<%@ include file="../header_solucionador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 0}">
+			<%@ include file="../header_solicitante.jsp"%>
+		</c:if>
 	
 	<div class="container">
 		<form action="alterar_fila" method="post">

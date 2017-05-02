@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -12,7 +13,15 @@
 <link href="res/css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="../header.jsp" />
+		<c:if test="${usuario_logado.tipo eq 2}">
+			<%@ include file="../header_administrador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 1}">
+			<%@ include file="../header_solucionador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 0}">
+			<%@ include file="../header_solicitante.jsp"%>
+		</c:if>
 	<div class="container">
 		<form id="form" class="form-horizontal" action="criar_usuario"
 			method="post" onsubmit="return valida();">
@@ -95,30 +104,33 @@
 					</div>
 				</div>
 
+
 				<div class="form-group">
 					<div class="input-group col-md-6">
 						<div class="input-group-addon">
 							<span>Tipo do Usuario</span>
 						</div>
-						
-  <input type="radio" name="tipo" id="tipo" value="0">
-  <label for="tipo">Solicitante </label>
 
-  <input type="radio" name="tipo" id="tipo" value="1">
-  <label for="tipo">Solucionador</label>
-
-
+						<select name="tipo" class="form-control" id="tipo">
+							<option value="0">Solicitante</option>
+							<option value="1">Solucionador</option>
+							<option value="2">Administrador</option>
+						</select>
 					</div>
 				</div>
 
-				<!-- btn submit -->
-				<div class="form-group">
-					<input type="submit" class="btn btn-primary" value="Cadastrar" />
-					<input type="reset" class="btn btn-default" value="Cancelar" />
-				</div>
 
-			</div>
-		</form>
+
+		
+
+	<!-- btn submit -->
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Cadastrar" /> <input
+			type="reset" class="btn btn-default" value="Cancelar" />
+	</div>
+
+	</div>
+	</form>
 	</div>
 	<!--  library jQuery  -->
 	<script src="res/js/jquery.min.js"></script>

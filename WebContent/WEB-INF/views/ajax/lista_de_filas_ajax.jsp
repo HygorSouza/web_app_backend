@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <c:choose>
 	<c:when test="${not empty filas}">
 		<div class="table">
@@ -27,11 +28,17 @@
 									</c:otherwise>
 								</c:choose></td>
 							<td>
+								<c:if test="${fila.isAtiva() }">
 								<button id="btn${fila.id}" type="button"
 									class="btn btn-danger btn-xs" data-toggle="modal"
-									data-target="#delete-modal" data-fila="${fila.id}">Excluir</button>
-
-								<a class="btn btn-alert" href="atualizar_fila?id=${fila.id}">Atualizar</a>
+									data-target="#delete-modal" data-fila="${fila.id}">Desativar</button>
+								</c:if>	
+								<c:if test="${fila.isAtiva() == false }">
+								<button id="btn${fila.id}" type="button"
+									class="btn btn-danger btn-xs" data-toggle="modal"
+									data-target="#delete-modal" data-fila="${fila.id}">Ativar</button>
+								</c:if>	
+								
 							</td>
 						</tr>
 					</c:forEach>

@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import br.usjt.app.servicedesck.model.Chamado;
+import br.usjt.app.servicedesck.model.StatusChamado;
 
 @Repository
 public class ChamadoDAO {
@@ -19,6 +20,11 @@ public class ChamadoDAO {
 	public void registrar(Chamado chamado){
 		manager.persist(chamado);
 	}
+	
+	public void atualizar(Chamado chamado){
+		manager.merge(chamado);
+	}
+	
 	/*
 	 * Metodo que consulta o banco de dados e retorna o chamado 
 	 * que conter aquele id
@@ -28,7 +34,7 @@ public class ChamadoDAO {
 		return manager.find(Chamado.class, id);
 	}
 	
-	public List<Chamado> listar(Long id, String status){
+	public List<Chamado> listar(Long id, StatusChamado status){
 		
 		String jpql = "SELECT c FROM Chamado c WHERE c.fila.id = :id and c.status = :status";
 		TypedQuery<Chamado> query = manager.createQuery(jpql, Chamado.class);
@@ -50,6 +56,23 @@ public class ChamadoDAO {
 	
 	public List<Chamado> listarPorPrioridade(){
 		TypedQuery<Chamado> query = manager.createNamedQuery("Chamado.porPrioridade", Chamado.class);
+		return query.getResultList();
+	}
+	public List<Chamado> consultarChamadosFeitos(Long id) {
+		TypedQuery<Chamado> query = manager.createNamedQuery("Chamado.porPrioridadePorSolicitante", Chamado.class);
+		query.setParameter("idSolicitante", id);
+		return query.getResultList();
+	}
+	
+	/**
+	 * Consulta o banco e pega todos os chamados realizados por aquele usuario
+	 * @Author Rafael
+	 */
+	public List<Chamado> pesquisarChamadosSolicitante(String pesquisar, Long id){
+		String jpql = "SELECT c FROM Chamado c WHERE c.idSolicitante.id = :id AND c.breveDescricao LIKE :pesquisar";
+		TypedQuery<Chamado> query = manager.createQuery(jpql, Chamado.class);
+		query.setParameter("pesquisar", "%"+pesquisar+"%");
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 	

@@ -41,7 +41,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="20971520" />
 	</bean> -->	
-	
 	  <mvc:interceptors>
 		<bean class="br.usjt.app.servicedesck.interceptor.LoginInterceptor" />
 	</mvc:interceptors> 

@@ -13,9 +13,15 @@
 	<link href="res/css/style.css" rel="stylesheet"/>
 </head>
 <body>
-	
-	<jsp:include page="../header.jsp"/>
-	
+		<c:if test="${usuario_logado.tipo eq 2}">
+			<%@ include file="../header_administrador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 1}">
+			<%@ include file="../header_solucionador.jsp"%>
+		</c:if>
+		<c:if test="${usuario_logado.tipo eq 0}">
+			<%@ include file="../header_solicitante.jsp"%>
+		</c:if>
 	<div class="container">
 		<form action="alterar_usuario" method="post">
 			<input type="hidden" value="${usuario.id}" name="id"/>
@@ -38,13 +44,12 @@
 			<br/>
 			
 			<label>Status</label>
-			<label>Status</label>
 			<c:choose>
-				<c:when test="${usuario.ativo == 1}">
-					<input type="checkbox" name="ativo" value="1" placeholder="O usuario pode utilizar o sistema ?" checked="checked" />
+				<c:when test="${usuario.ativo}">
+					<input type="checkbox" name="ativo" placeholder="O usuario pode utilizar o sistema ?" checked="checked" />
 				</c:when>
 				<c:otherwise>
-					<input type="checkbox" name="ativo" value="0" placeholder="O usuario pode utilizar o sistema ?"/>
+					<input type="checkbox" name="ativo" placeholder="O usuario pode utilizar o sistema ?"/>
 				</c:otherwise>
 			</c:choose>
 			

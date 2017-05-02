@@ -7,20 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Usuario implements Serializable {
-	@Transient
+
 	private static final long serialVersionUID = 1L;
 	
-	@Transient
+	
+	public static final int ADMINISTRADOR = 2;
+	
+	
 	public static final int SOLUCIONADOR = 1;
 	
-	@Transient
-	public static final int SOLICITANTE = 0;
 	
+	public static final int SOLICITANTE = 0;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,6 +49,11 @@ public class Usuario implements Serializable {
 	private int ativo;
 	
 	private int tipo;
+	
+	
+	@JoinColumn(nullable=true)
+	@ManyToOne
+	private Fila fila;
 
 	public int getTipo() {
 		return tipo;
@@ -146,6 +154,14 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", username=" + username + ", password=" + password + ", cpf="
 				+ cpf + ", cargo=" + cargo + ", ativo=" + ativo + ", tipo=" + tipo + "]";
+	}
+
+	public Fila getFila() {
+		return fila;
+	}
+
+	public void setFila(Fila fila) {
+		this.fila = fila;
 	}
 	
 	

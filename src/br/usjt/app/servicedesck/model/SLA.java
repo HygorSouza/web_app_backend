@@ -1,18 +1,19 @@
 package br.usjt.app.servicedesck.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="SLA.listarTodas",query="SELECT  s FROM SLA s")
+})
 public class SLA {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,8 +24,7 @@ public class SLA {
 	private String descricao;
 	
 	@NotNull
-	@Temporal(TemporalType.TIME)
-	private Date tempoDeAtendimento;
+	private Integer tempoDeAtendimento;
 	
 	@Min(0)
 	@Max(5)
@@ -38,11 +38,11 @@ public class SLA {
 		this.id = id;
 	}
 
-	public Date getTempoDeAtendimento() {
+	public Integer getTempoDeAtendimento() {
 		return tempoDeAtendimento;
 	}
 
-	public void setTempoDeAtendimento(Date tempoDeAtendimento) {
+	public void setTempoDeAtendimento(Integer tempoDeAtendimento) {
 		this.tempoDeAtendimento = tempoDeAtendimento;
 	}
 

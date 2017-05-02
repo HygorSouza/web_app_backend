@@ -11,16 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Fila.listarAtivas",query="SELECT f FROM Fila f WHERE f.ativa = :ativa")
+	@NamedQuery(name="Fila.listarAtivas",query="SELECT f FROM Fila f LEFT JOIN FETCH f.sla WHERE f.ativa = true ")
 })
 public class Fila implements Serializable {
 
-	@Transient
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
