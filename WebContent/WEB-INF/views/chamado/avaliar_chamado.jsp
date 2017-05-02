@@ -43,7 +43,7 @@
 					Fila: <input type=text disabled="disabled" value="${chamado.fila.nome}"/>	
 					
 					
-						<select name="status" class="form-control" id="sel1">
+						<select name="statusChamado" class="form-control" id="sel1">
 							<c:forEach var="status" items="${listStatus}">
 								<option value="${status}"> ${status.status} </option>
 							</c:forEach>

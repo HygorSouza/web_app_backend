@@ -90,7 +90,10 @@ public class ChamadoService {
 		dao.atualizar(chamado);
 	}
 	
-	// ---- ???? ----///
+	/**
+	 * @author Hygor S.
+	 * @param lista lista de chamados para contabilizar o sla 
+	 */
 	private void sla(List<Chamado> lista){
 		Calendar hoje = Calendar.getInstance();
 		

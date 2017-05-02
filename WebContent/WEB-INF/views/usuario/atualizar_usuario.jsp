@@ -45,7 +45,7 @@
 			
 			<label>Status</label>
 			<c:choose>
-				<c:when test="${usuario.ativo}">
+				<c:when test="${usuario.ativo == 1}">
 					<input type="checkbox" name="ativo" placeholder="O usuario pode utilizar o sistema ?" checked="checked" />
 				</c:when>
 				<c:otherwise>

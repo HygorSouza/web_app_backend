@@ -41,6 +41,7 @@ public class ChamadoRestController {
 		return lista;
 	} */
 	
+	
 	@RequestMapping(method=RequestMethod.GET, value="rest/chamado/{id}")
 	public @ResponseBody Chamado listaChamado(@PathVariable("id") Long id) {
 		Chamado chamado = new Chamado();

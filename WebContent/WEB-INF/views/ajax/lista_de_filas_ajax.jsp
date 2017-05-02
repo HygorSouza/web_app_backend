@@ -28,12 +28,12 @@
 									</c:otherwise>
 								</c:choose></td>
 							<td>
-								<c:if test="${fila.isAtiva() }">
+								<c:if test="${fila.ativa }">
 								<button id="btn${fila.id}" type="button"
 									class="btn btn-danger btn-xs" data-toggle="modal"
 									data-target="#delete-modal" data-fila="${fila.id}">Desativar</button>
 								</c:if>	
-								<c:if test="${fila.isAtiva() == false }">
+								<c:if test="${fila.ativa == false }">
 								<button id="btn${fila.id}" type="button"
 									class="btn btn-danger btn-xs" data-toggle="modal"
 									data-target="#delete-modal" data-fila="${fila.id}">Ativar</button>

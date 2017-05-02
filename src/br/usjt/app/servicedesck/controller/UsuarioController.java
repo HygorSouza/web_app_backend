@@ -25,6 +25,7 @@ import br.usjt.app.servicedesck.service.UsuarioService;
 @Transactional
 @Controller
 public class UsuarioController {
+	
 	private UsuarioService usuarioService;
 	private FilaService filaService;
 	/**
