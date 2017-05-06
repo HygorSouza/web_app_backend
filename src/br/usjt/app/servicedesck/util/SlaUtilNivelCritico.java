@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import br.usjt.app.servicedesck.model.Chamado;
 import br.usjt.app.servicedesck.model.StatusChamado;
+import br.usjt.app.servicedesck.model.StatusSla;
 
 
 /**
@@ -34,13 +35,11 @@ public class SlaUtilNivelCritico extends SlaUtil {
 		long horas = milisegundos / 3600000L; // 3600000L = 1 hora
 		int tempoParaAtendimento = chamado.getFila().getSla().getTempoDeAtendimento();
 		
-		System.out.println("-- Nivel critico --");
-		System.out.println(horas + " tempo em horas");
-		
 		if(horas > tempoParaAtendimento ){
 			chamado.setStatus(StatusChamado.ESTOROU_SLA);
 		}
-		System.out.println(chamado.getStatus());
+		
+		chamado.setStatusSla(new StatusSla(chamado.getFila().getSla(), (int)horas));
 		
 		return chamado.getStatus();
 	}

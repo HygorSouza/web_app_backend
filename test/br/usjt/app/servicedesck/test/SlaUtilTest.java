@@ -94,8 +94,8 @@ public class SlaUtilTest {
 		SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
 		assertEquals(msg,StatusChamado.ESTOROU_SLA,util.contabilizarSla(chamado, hoje));
 	}
-	
-	@Test(timeout=60000L)
+	@Test
+	//@Test(timeout=60000L)
 	public void test02ContabilizarSla() {
 		String msg = "chamado com sla contabilizado com sucesso estourando sla";
 		
@@ -132,6 +132,13 @@ public class SlaUtilTest {
 			SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
 			assertEquals(StatusChamado.ESTOROU_SLA, util.contabilizarSla(chamado, hoje));
 		}
+	}
+	
+	@Test
+	public void test100(){
+		SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
+		
+		System.out.println(util.test(chamado, hoje).percentual());
 	}
 
 }

@@ -14,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -54,6 +55,9 @@ public class Chamado implements Serializable {
 	
 	@ManyToOne
 	private Usuario solucionador;
+	
+	@Transient
+	private StatusSla statusSla;
 	
 	public Usuario getSolucionador() {
 		return solucionador;
@@ -126,5 +130,13 @@ public class Chamado implements Serializable {
 	public void setSolicitante(Usuario solicitante) {
 		this.solicitante = solicitante;
 	}
+	
+	public StatusSla getStatusSla() {
+		return statusSla;
+	}
 
+	public void setStatusSla(StatusSla statusSla) {
+		this.statusSla = statusSla;
+	}
+	
 }
