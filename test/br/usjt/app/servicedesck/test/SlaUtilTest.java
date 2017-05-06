@@ -133,12 +133,5 @@ public class SlaUtilTest {
 			assertEquals(StatusChamado.ESTOROU_SLA, util.contabilizarSla(chamado, hoje));
 		}
 	}
-	
-	@Test
-	public void test100(){
-		SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
-		
-		System.out.println(util.test(chamado, hoje).percentual());
-	}
 
 }

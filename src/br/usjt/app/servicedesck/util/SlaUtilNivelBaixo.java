@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 import br.usjt.app.servicedesck.model.Chamado;
 import br.usjt.app.servicedesck.model.StatusChamado;
-import br.usjt.app.servicedesck.model.StatusSla;
 
 /**
  * 
@@ -67,7 +66,7 @@ public class SlaUtilNivelBaixo extends SlaUtil {
 			chamado.setStatus(StatusChamado.ESTOROU_SLA);
 		}
 		
-		chamado.setStatusSla(new StatusSla(chamado.getFila().getSla(), (int)hr));
+		chamado.setHoras(hrsUteis);
 		
 		return chamado.getStatus();
 	}

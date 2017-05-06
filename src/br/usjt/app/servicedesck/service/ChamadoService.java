@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import br.usjt.app.servicedesck.dao.ChamadoDAO;
 import br.usjt.app.servicedesck.model.Chamado;
 import br.usjt.app.servicedesck.model.StatusChamado;
-import br.usjt.app.servicedesck.model.Usuario;
 import br.usjt.app.servicedesck.util.SlaUtil;
 import br.usjt.app.servicedesck.util.SlaUtilFactory;
 
@@ -29,7 +28,9 @@ public class ChamadoService {
 	 * @Author Rafael
 	 */
 	public Chamado consultar(Long id){
-		return dao.consultar(id);
+		Chamado c = dao.consultar(id);
+		sla(c);
+		return c;
 	}
 
 	public void criar(Chamado chamado) {
@@ -41,6 +42,7 @@ public class ChamadoService {
 	
 	public List<Chamado> listar(Long id, StatusChamado status){
 		List<Chamado> lista = dao.listar(id, status);
+		sla(lista);
 		return lista;
 	}
 	
@@ -57,6 +59,7 @@ public class ChamadoService {
 	
 	public List<Chamado> listarPorPrioridade(){
 		List<Chamado> lista = dao.listarPorPrioridade();
+		sla(lista);
 		return lista;
 	}
 	
@@ -74,6 +77,7 @@ public class ChamadoService {
 		} else{
 			lista = dao.pesquisar(pesquisa);
 		}
+		sla(lista);
 		return lista;
 	}
 	
@@ -83,6 +87,7 @@ public class ChamadoService {
 	 */
 	public List<Chamado> consultarChamadosFeitos(Long id){
 		List<Chamado> lista = dao.consultarChamadosFeitos(id);
+		sla(lista);
 		return lista;
 	}
 	
@@ -94,14 +99,23 @@ public class ChamadoService {
 	 * @author Hygor S.
 	 * @param lista lista de chamados para contabilizar o sla 
 	 */
-	private void sla(List<Chamado> lista){
-		Calendar hoje = Calendar.getInstance();
-		
+	private void sla(List<Chamado> lista){		
 		for(int i = 0; i < lista.size() ; i++){
 			Chamado chamado = lista.get(i);
-			SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
-			util.contabilizarSla(chamado, hoje);
+			sla(chamado);
 		}
 	}
 	
+	
+	/**
+	 * @author Hygor S.
+	 * 
+	 * @param chamado
+	 */
+	private void sla(Chamado chamado){
+		Calendar hoje = Calendar.getInstance();
+		
+		SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
+		util.contabilizarSla(chamado, hoje);
+	}
 }

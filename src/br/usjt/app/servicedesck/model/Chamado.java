@@ -57,7 +57,7 @@ public class Chamado implements Serializable {
 	private Usuario solucionador;
 	
 	@Transient
-	private StatusSla statusSla;
+	private int horas;
 	
 	public Usuario getSolucionador() {
 		return solucionador;
@@ -131,12 +131,35 @@ public class Chamado implements Serializable {
 		this.solicitante = solicitante;
 	}
 	
-	public StatusSla getStatusSla() {
-		return statusSla;
+	public void setHoras(int horas){
+		this.horas = horas;
 	}
-
-	public void setStatusSla(StatusSla statusSla) {
-		this.statusSla = statusSla;
+	
+	public int percentual(){
+		int resultado = 0;
+		if(horas == 0){
+			resultado = 0;
+		} else {
+			resultado = (horas * 100) / fila.getSla().getTempoDeAtendimento();
+		}
+		
+		return resultado;
 	}
+	
+	public String alert(){
+		String msg;
+		if(percentual() < 50){
+			msg = "";
+		} else if( percentual() <= 70){
+			msg = "info";
+		} else  if(percentual() <= 100){
+			msg = "warning";
+		} else{
+			msg = "danger";
+		}
+			
+		return msg;
+	}
+	
 	
 }
