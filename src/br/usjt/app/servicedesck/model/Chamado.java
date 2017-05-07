@@ -135,6 +135,10 @@ public class Chamado implements Serializable {
 		this.horas = horas;
 	}
 	
+	public int getHoras(){
+		return this.horas;
+	}
+	
 	public int percentual(){
 		int resultado = 0;
 		if(horas == 0){
@@ -152,7 +156,7 @@ public class Chamado implements Serializable {
 			msg = "";
 		} else if( percentual() <= 70){
 			msg = "info";
-		} else  if(percentual() <= 100){
+		} else  if(percentual() < 100){
 			msg = "warning";
 		} else{
 			msg = "danger";

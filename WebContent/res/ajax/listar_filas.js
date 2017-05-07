@@ -3,13 +3,13 @@
  */
 $(document).ready(function() {
 	$("#pesquisar_filas").on("submit", function(event) {
-		
+		alert(event.action)
 		event.preventDefault();
 		var dados = $(this).serialize();
 		
 		$.ajax({
 			type : "POST",
-			url : 'pesquisar_filas',
+			url : event.action,
 			// dataType:'json',
 			data : dados,
 			success : function(result) {

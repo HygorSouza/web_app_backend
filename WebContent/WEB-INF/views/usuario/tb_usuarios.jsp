@@ -26,7 +26,7 @@
 									data-target="#delete-modal" data-usuario="${usuario.id}">Excluir</button>
 
 								<a class="btn btn-alert"
-								href="atualizar_usuario?id=${usuario.id}">Atualizar</a>
+								href="<%=request.getContextPath()%>/usuario/atualizar_usuario?id=${usuario.id}">Atualizar</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -34,10 +34,4 @@
 			</table>
 		</div>
 	</c:when>
-	
-	<c:otherwise>
-		<div class="row col-md-12">
-			<label>Usuario não encontrado !</label>
-		</div>
-	</c:otherwise>
 </c:choose>

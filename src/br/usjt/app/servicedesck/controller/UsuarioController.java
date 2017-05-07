@@ -24,8 +24,9 @@ import br.usjt.app.servicedesck.service.UsuarioService;
  */
 @Transactional
 @Controller
+@RequestMapping(UsuarioController.URI)
 public class UsuarioController {
-	
+	public static final String URI = "usuario/";
 	private UsuarioService usuarioService;
 	private FilaService filaService;
 	/**
@@ -111,7 +112,8 @@ public class UsuarioController {
 			List<Usuario> listaUsuario = usuarioService.listarPorTipo(ativo, tipo);
 			model.addAttribute("usuarios", listaUsuario);
 		}
-		return "ajax/lista_de_usuarios_ajax";
+		//return "ajax/lista_de_usuarios_ajax";
+		return "usuario/lista_de_usuarios";
 	}
 
 	@RequestMapping("atualizar_usuario")

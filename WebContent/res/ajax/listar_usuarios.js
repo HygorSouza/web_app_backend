@@ -3,13 +3,13 @@
  */
 $(document).ready(function() {
 	$("#consultar_usuario").on("submit", function(event) {
-		
+		alert(event.action);
 		event.preventDefault();
 		var dados = $(this).serialize();
 		
 		$.ajax({
 			type : "POST",
-			url : 'consultar_usuario',
+			url : event.action,
 			// dataType:'json',
 			data : dados,
 			success : function(result) {

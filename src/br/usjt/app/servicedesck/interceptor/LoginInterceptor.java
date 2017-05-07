@@ -26,7 +26,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (user != null) {
 			return true;
 		} else {
-			response.sendRedirect("index");
+			response.sendRedirect(request.getContextPath()+"/index");
 			return false;
 		}
 	}

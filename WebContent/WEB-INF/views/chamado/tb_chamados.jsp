@@ -15,12 +15,13 @@
 						<td>status</td>
 						<td>dataDeAbertura</td>
 						<td>dataDeFechamento</td>
-						<td>#</td>
+						<td>Horas</td>
+						<td>Ações</td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${listaChamado}" var="chamado">
-						<tr class="filters ${chamado.alert}">
+						<tr class="filters ${chamado.alert()}">
 
 							<td><a href="avaliar_chamado?id=${chamado.id}">
 									${chamado.breveDescricao}</a></td>
@@ -33,16 +34,23 @@
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td><a href="avaliar_chamado?id=${chamado.id}"> <c:choose>
+							<td>
+								<a href="avaliar_chamado?id=${chamado.id}"> 
+									<c:choose>
 										<c:when test="${not empty chamado.dataDeFechamento}">
 											<fmt:formatDate value="${chamado.dataDeFechamento.time}"
 												pattern="dd-MM-yyyy HH:mm:ss" />
 										</c:when>
 										<c:otherwise>
 										Chamado sem data de fechamento
-									</c:otherwise>
+										</c:otherwise>
 									</c:choose>
-							</a></td>
+								</a>
+							</td>
+							<td>${chamado.horas}</td>
+							<td>
+								<a class="btn btn-default btn-sm" href="editar_chamado?id=${chamado.id}">Editar Chamado</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

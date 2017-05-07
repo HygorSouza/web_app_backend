@@ -37,7 +37,7 @@
 			</div>
 			<div class="row col-md-12">
 				<button type="submit" class="btn btn-primary">
-					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Logar
+					<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar
 				</button>
 			</div>
 		</form>

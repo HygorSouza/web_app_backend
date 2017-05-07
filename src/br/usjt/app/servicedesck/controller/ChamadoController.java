@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -58,11 +59,17 @@ public class ChamadoController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("cancelar_chamado")
+	public void cancelarChamado(Chamado chamado,HttpServletResponse response){
+		chamadoService.cancelarChamado(chamado);
+		response.setStatus(HttpServletResponse.SC_OK);
+	}
 
 	 
 	@RequestMapping("listar_chamado")
 	public String listarChamado(Model model, HttpSession session){
-		List<StatusChamado> listaStatus = Arrays.asList(StatusChamado.ABERTO , StatusChamado.FECHADO , StatusChamado.CANCELADO);
+		List<StatusChamado> listaStatus = StatusChamado.getList();
 		List<Chamado> listaChamado; 
 		List<Fila>   listaFila = filaService.listarAtivas(); 
 		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
@@ -92,7 +99,8 @@ public class ChamadoController {
 		
 		List<Chamado> lista = chamadoService.pesquisar(pesquisa, user.getId(), user.getTipo());
 		model.addAttribute("listaChamado", lista);
-		return "ajax/listar_chamados_ajax";
+		//return "ajax/listar_chamados_ajax";
+		return "chamado/listar_chamado";
 	}
 	
 	/**
@@ -104,7 +112,8 @@ public class ChamadoController {
 	public String pesquisarFilaStatus(@RequestParam("fila.id")Long id, @RequestParam("status")StatusChamado status, Model model){
 		List<Chamado> lista = chamadoService.listar(id, status);
 		model.addAttribute("listaChamado", lista);
-		return "ajax/listar_chamados_ajax";
+		//return "ajax/listar_chamados_ajax";
+		return "chamado/listar_chamado";
 	}
    
 	/** 
@@ -128,8 +137,6 @@ public class ChamadoController {
 		   	*/
 		@RequestMapping("listar_chamadoUsuario")
 		public String listaUsuarioChamado(Long id, Model model){
-			
-
 			
 			List<Chamado> listaSolicitante = chamadoService.consultarChamadosFeitos(id);	
 			model.addAttribute("listaSolicitante", listaSolicitante);

@@ -118,4 +118,9 @@ public class ChamadoService {
 		SlaUtil util = SlaUtilFactory.create(chamado.getFila().getSla());
 		util.contabilizarSla(chamado, hoje);
 	}
+
+	public void cancelarChamado(Chamado chamado) {
+		chamado.setStatus(StatusChamado.CANCELADO);
+		dao.cancelarChamado(chamado);
+	}
 }

@@ -14,9 +14,12 @@ import br.usjt.app.servicedesck.service.SlaService;
 
 @Transactional
 @Controller
+@RequestMapping(FilaController.URI)
 public class FilaController {
 	private FilaService filaService;
 	private SlaService slaService;
+	
+	public static final String URI = "fila/";
 	
 	@Autowired
 	public FilaController(FilaService filaService,SlaService slaService) {
@@ -64,7 +67,8 @@ public class FilaController {
 		} else{
 			model.addAttribute("filas", filaService.pesquisarPorNome(param));
 		}
-		return "ajax/lista_de_filas_ajax";
+		//return "ajax/lista_de_filas_ajax";
+		return "fila/lista_de_filas";
 	}
 	
 	

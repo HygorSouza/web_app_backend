@@ -34,18 +34,10 @@ public class UsuarioService {
 
 	public List<Usuario> pesquisar(String parametro) {
 		if (parametro.matches("[0-9]*")) {
-			return pesquisarPorCPF(parametro);
+			return userDAO.pesquisarPorCPF(parametro);
 		} else {
-			return pesquisarPorNome(parametro);
+			return userDAO.pesquisarPorNome(parametro);
 		}
-	}
-
-	private List<Usuario> pesquisarPorCPF(String cpf) {
-		return userDAO.pesquisarPorCPF(cpf);
-	}
-
-	private List<Usuario> pesquisarPorNome(String nome) {
-		return userDAO.pesquisarPorNome(nome);
 	}
 
 	public boolean fazerLogin(Usuario user) {

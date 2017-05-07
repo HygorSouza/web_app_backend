@@ -13,7 +13,7 @@
                         Deseja realmente excluir esta fila?
                     </div>
                     <div class="modal-footer">
-                    	<form action="remover_fila" method="post">
+                    	<form action="<%=request.getContextPath()%>/fila/remover_fila" method="post">
                         	<input type="hidden" name="id" id="id_excluir" />
                             <button  id="btn_excluir" type="submit" class="btn btn-primary" >Sim</button>
                             <button  type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
