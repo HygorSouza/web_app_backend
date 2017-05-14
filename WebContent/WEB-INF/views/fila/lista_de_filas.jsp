@@ -16,7 +16,7 @@
 	
 	<div class="container">
 		<!-- campo de pesquisa -->
-		<form id="pesquisar_filas" action="<%=request.getContextPath()%>/filas/pesquisar_filas" method="post">
+		<form id="pesquisar_filas" action="<%=request.getContextPath()%>/fila/pesquisar_filas" method="post">
 				<div class="col-md-6">
 					<div class="input-group h2">
 						<input type="text" name="param" class="form-control" placeholder="Digite o nome ou nada para listar todas as filas" /> 
@@ -34,6 +34,13 @@
 		</div>
 	</div>
 	<myTag:script/>
-	<script src="<%=request.getContextPath()%>/res/ajax/listar_filas.js"></script>
+	<script>$("#delete-modal").on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget); //botao que disparou a modal
+      var recipient = button.data('fila');
+   $("#id_excluir").val(recipient);
+	});
+   </script>
+
+	
 </body>
 </html>

@@ -22,12 +22,19 @@ public class UsuarioService {
 		user.setAtivo(1);
 		userDAO.registrar(user);
 	}
+	public void excluir(Usuario user){
+		System.out.println(user.getId().toString());
+		 Usuario usuario = consultar(user.getId());
+		 if(usuario.getAtivo() == 1){
+			 usuario.setAtivo(0);
+		 }else{
+			 usuario.setAtivo(1);
+		 }
+		 userDAO.atualizar(usuario);
+	}
 
 	public void atualizar(Usuario user) {
 		Usuario u = consultar(user.getId());
-		u.setNome(user.getNome());
-		u.setCargo(user.getCargo());
-		u.setAtivo(user.getAtivo());
 		
 		userDAO.atualizar(u);
 	}

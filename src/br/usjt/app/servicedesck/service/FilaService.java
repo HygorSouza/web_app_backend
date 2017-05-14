@@ -34,8 +34,14 @@ public class FilaService {
 		filaDAO.atualizar(f);
 	}
 	
-	public void excluir(Fila fila){
-		filaDAO.excluir(fila);
+	public void excluir(Long id){
+		Fila fila = filaDAO.consultar(id);
+		if(fila.isAtiva()){
+			fila.setAtiva(false);
+		}else{
+			fila.setAtiva(true);
+		}
+		filaDAO.atualizar(fila);
 	}
 	
 	public List<Fila> pesquisarPorNome(String nome){

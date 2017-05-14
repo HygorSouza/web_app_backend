@@ -11,7 +11,9 @@ public enum StatusChamado {
 	TROCA_DE_EQUIPAMENTO("Aguardando equipamento para troca");
 		
 	final String status;
-	
+	public static StatusChamado getAberto(){
+		return StatusChamado.ABERTO;
+	}
 	StatusChamado(String stringStatus){
 		this.status = stringStatus;
 	}

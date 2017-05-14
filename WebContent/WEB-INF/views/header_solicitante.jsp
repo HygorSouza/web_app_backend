@@ -21,8 +21,7 @@
 						data-toggle="dropdown" href="#"> Configurações <span
 							class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="dropdown-menu">
-							<li><a href="minhaConta">Ver meus perfil</a></li>
-							<li><a href="atualizar_senha">Editar Senha</a></li>
+							<li><a href="atualizar_dados">  Meus Dados </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="logout">Sair </a></li>
 						</ul></li>

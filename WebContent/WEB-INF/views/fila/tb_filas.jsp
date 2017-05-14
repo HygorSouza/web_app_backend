@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:choose>
@@ -11,7 +11,7 @@
 						<td>Codigo</td>
 						<td>Fila</td>
 						<td>Ativa</td>
-						<td>Ações</td>
+						<td>AÃ§Ãµes</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,7 +24,7 @@
 										<span>Sim</span>
 									</c:when>
 									<c:otherwise>
-										<span>Não</span>
+										<span>NÃ£o</span>
 									</c:otherwise>
 								</c:choose></td>
 							<td>
@@ -48,7 +48,7 @@
 	</c:when>
 	<c:otherwise>
 		<div class="row col-md-12">
-			<label>Fila de atendimento não encontrada</label>
+			<label>Fila de atendimento nÃ£o encontrada</label>
 		</div>
 	</c:otherwise>
 </c:choose>

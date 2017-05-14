@@ -41,7 +41,7 @@ ol, ul {
 .glyphicon-chevron-down{
     transition: linear transform 0.2s;
 }
-.dropdown-menu>li>a{
+.dropdown-menu>li>a , .dropdown-menu>li>form{
 	text-align: right;
 }
 /*

@@ -74,8 +74,8 @@ public class FilaController {
 	
 	// remover fila
 	@RequestMapping("remover_fila")
-	public String removerFila(Fila fila){
-		filaService.excluir(fila);
+	public String removerFila(@RequestParam(name="id")Long id){
+		filaService.excluir(id);
 		return "fila/lista_de_filas";
 	}
 	

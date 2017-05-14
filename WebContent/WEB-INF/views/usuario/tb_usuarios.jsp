@@ -21,10 +21,18 @@
 							<td>${usuario.nome}</td>
 							<td>${usuario.cargo}</td>
 							<td>
+							<c:choose>
+								<c:when test="${usuario.ativo == 1}">
 								<button id="btn${usuario.id}" type="button"
 									class="btn btn-danger btn-xs" data-toggle="modal"
-									data-target="#delete-modal" data-usuario="${usuario.id}">Excluir</button>
-
+									data-target="#delete-modal" data-usuario="${usuario.id}">Desativar</button>
+								</c:when>
+								<c:when test="${usuario.ativo == 0}">
+								<button id="btn${usuario.id}" type="button"
+									class="btn btn-primary" data-toggle="modal"
+									data-target="#delete-modal" data-usuario="${usuario.id}">Ativar</button>
+								</c:when>
+							</c:choose>
 								<a class="btn btn-alert"
 								href="<%=request.getContextPath()%>/usuario/atualizar_usuario?id=${usuario.id}">Atualizar</a>
 							</td>

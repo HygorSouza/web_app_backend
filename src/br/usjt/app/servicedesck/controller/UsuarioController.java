@@ -1,17 +1,16 @@
 package br.usjt.app.servicedesck.controller;
 
-import java.util.List;
+import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import br.usjt.app.servicedesck.model.Usuario;
 import br.usjt.app.servicedesck.service.FilaService;
 import br.usjt.app.servicedesck.service.UsuarioService;
@@ -61,6 +60,15 @@ public class UsuarioController {
 		model.addAttribute("filas", filaService.listarAtivas());
 		return "usuario/criar_solucionador";
 	}
+	@RequestMapping("atualizar_dados")
+	public void atualizarDados(HttpServletResponse response){
+		try {
+			response.getWriter().println("FOI");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
 	/**
@@ -102,15 +110,14 @@ public class UsuarioController {
 	 * 
 	 */
 	@RequestMapping("consultar_usuario")
-	public String consultarUsuario(@RequestParam("parametro") String parametro, @RequestParam("Ativo") int ativo,
-			@RequestParam("Tipo") int tipo, Model model) {
+	public String consultarUsuario(@RequestParam("parametro") String parametro, Model model) {
 
 		if (!parametro.equals("")) {
 			model.addAttribute("usuarios", usuarioService.pesquisar(parametro));
 		} else {
 
-			List<Usuario> listaUsuario = usuarioService.listarPorTipo(ativo, tipo);
-			model.addAttribute("usuarios", listaUsuario);
+		//	List<Usuario> listaUsuario = usuarioService.listarPorTipo(ativo, tipo);
+		//	model.addAttribute("usuarios", listaUsuario);
 		}
 		//return "ajax/lista_de_usuarios_ajax";
 		return "usuario/lista_de_usuarios";
@@ -119,12 +126,12 @@ public class UsuarioController {
 	@RequestMapping("atualizar_usuario")
 	public String atualizarUsuario(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("usuario", usuarioService.consultar(id));
-		return "usuario/atualizar_usuario";
+		return "usuario/lista_de_usuarios";
 	}
 
 	@RequestMapping("alterar_usuario")
 	public String alterarUsuario(Usuario user) {
-		usuarioService.atualizar(user);
+		usuarioService.excluir(user);
 		return "usuario/lista_de_usuarios";
 	}
 
@@ -136,7 +143,7 @@ public class UsuarioController {
 	 */
 	@RequestMapping("remover_usuario")
 	public String removerUsuario(Usuario user) {
-		usuarioService.atualizar(user);
+		usuarioService.excluir(user);
 		return "redirect:pesquisar_usuario";
 	}
 }

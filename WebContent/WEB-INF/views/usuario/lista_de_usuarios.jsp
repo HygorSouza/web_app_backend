@@ -32,14 +32,14 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-1">
+		<!--	<div class="col-sm-1">
 				<label>Status:</label>
 			</div>
 			
 			<c:if test="${LoginInterceptor.usuario.getTipo() == 1}">
 									<a href="pesquisar_usuario">Pesquisar Usuario</a>
 			</c:if>
-			<div class="col-sm-2">
+		  	<div class="col-sm-2">
 				<select class="form-control" name="Tipo" id="Tipo">
 					<option value="0">Solicitante</option>
 					<option value="1">Solucionador</option>
@@ -56,7 +56,7 @@
 					<option value="2">Todos</option>
 				</select>
 			</div>
-
+-->
 		</form>
 		<div id="table_usuario">
 			<%@ include file="tb_usuarios.jsp" %>
@@ -65,5 +65,12 @@
 	</div>
 	<!--  library jQuery  -->
 	<myTag:script/>
+	<script>
+	$("#delete-modal").on('show.bs.modal', function(event) {
+	    var button = $(event.relatedTarget); //botao que disparou a modal
+	      var recipient = button.data('usuario');
+	   $("#id_excluir").val(recipient);
+	});
+	</script>
 </body>
 </html>

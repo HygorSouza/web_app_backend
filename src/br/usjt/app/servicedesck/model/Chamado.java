@@ -1,3 +1,4 @@
+
 package br.usjt.app.servicedesck.model;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Entity
 @NamedQueries(value={
@@ -35,7 +37,7 @@ public class Chamado implements Serializable {
 	@NotNull
 	private String descricao;
 
-	@NotNull
+	@Null
 	@Enumerated(EnumType.STRING)
 	private StatusChamado status;
 
@@ -152,9 +154,9 @@ public class Chamado implements Serializable {
 	
 	public String alert(){
 		String msg;
-		if(percentual() < 50){
+		if(percentual() < 35){
 			msg = "";
-		} else if( percentual() <= 70){
+		} else if( percentual() <= 55){
 			msg = "info";
 		} else  if(percentual() < 100){
 			msg = "warning";
