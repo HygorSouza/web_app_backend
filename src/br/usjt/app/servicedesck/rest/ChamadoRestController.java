@@ -1,5 +1,7 @@
 package br.usjt.app.servicedesck.rest;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.usjt.app.servicedesck.model.Chamado;
+import br.usjt.app.servicedesck.model.Usuario;
 import br.usjt.app.servicedesck.service.ChamadoService;
 
 
@@ -26,20 +29,10 @@ public class ChamadoRestController {
 		this.chamadoService = chamadoService;
 	}
 
-	/*@RequestMapping(method=RequestMethod.GET, value="rest/chamado")
-	public @ResponseBody List<Local> listagem(String chave) {
-		List<Local> lista = null;
-		try{
-			if(chave == null || chave.equals("")){
-				lista = ls.listarLocais();
-			} else {
-				lista = ls.listarLocais(chave);
-			}
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		return lista;
-	} */
+	@RequestMapping(method=RequestMethod.POST, value="rest/chamado/usuario")
+	public @ResponseBody List<Chamado> listagem(@RequestBody Usuario usuario) {
+		return chamadoService.consultarChamadosFeitos(usuario.getId());
+	} 
 	
 	
 	@RequestMapping(method=RequestMethod.GET, value="rest/chamado/{id}")

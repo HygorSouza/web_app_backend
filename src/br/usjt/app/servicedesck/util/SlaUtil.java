@@ -8,10 +8,14 @@ import br.usjt.app.servicedesck.model.StatusChamado;
 public abstract class SlaUtil {
 
 	public final StatusChamado contabilizarSla(Chamado chamado, Calendar calendar) {
-		if (chamado.getDataDeFechamento() == null) {
-			return contabilizar(chamado, calendar);
+		if(chamado.getStatus() != StatusChamado.CANCELADO  ){
+			if (chamado.getDataDeFechamento() == null) {
+				return contabilizar(chamado, calendar);
+			} else {
+				return contabilizar(chamado, chamado.getDataDeFechamento());
+			}
 		} else {
-			return contabilizar(chamado, chamado.getDataDeFechamento());
+			return chamado.getStatus();
 		}
 	}
 

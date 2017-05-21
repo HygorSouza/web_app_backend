@@ -37,7 +37,7 @@ public class Chamado implements Serializable {
 	@NotNull
 	private String descricao;
 
-	@Null
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private StatusChamado status;
 
@@ -78,6 +78,16 @@ public class Chamado implements Serializable {
 	}
 
 	public StatusChamado getStatus() {
+//		if(status != null){
+//			return status;
+//		}
+//			
+//		if(status == null && dataDeFechamento == null){
+//			return StatusChamado.ABERTO;
+//		} else {
+//			// if(status == null && dataDeFechamento != null)
+//			return StatusChamado.FECHADO;
+//		}
 		return status;
 	}
 

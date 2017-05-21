@@ -23,7 +23,7 @@ public class FilaRestController {
 	@RequestMapping(method=RequestMethod.GET,value="rest/filas")
 	public @ResponseBody List<Fila> listarFila(){
 		
-		return filaService.listar();
+		return filaService.listarAtivas();
 	}
 	
 	
