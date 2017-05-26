@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable {
 
@@ -34,9 +36,11 @@ public class Usuario implements Serializable {
 
 	@NotNull
 	@Column(unique = true)
+	@JsonIgnore
 	private String username;
 
 	@NotNull
+	@JsonIgnore
 	private String password;
 
 	@NotNull

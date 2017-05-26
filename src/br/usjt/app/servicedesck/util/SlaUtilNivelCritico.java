@@ -33,11 +33,7 @@ public class SlaUtilNivelCritico extends SlaUtil {
 		long milisegundos = calendar.getTimeInMillis() - chamado.getDataDeAbertura().getTimeInMillis();
 
 		long horas = milisegundos / 3600000L; // 3600000L = 1 hora
-		int tempoParaAtendimento = chamado.getFila().getSla().getTempoDeAtendimento();
-
-		if (horas > tempoParaAtendimento) {
-			chamado.setStatus(StatusChamado.ESTOROU_SLA);
-		}
+		//int tempoParaAtendimento = chamado.getFila().getSla().getTempoDeAtendimento();
 
 		chamado.setHoras((int) horas);
 

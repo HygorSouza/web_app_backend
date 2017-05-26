@@ -61,10 +61,6 @@ public class SlaUtilNivelBaixo extends SlaUtil {
 		int hrsUteis = diasUteis(dataDoChamado,dataDeHoje) * (max - min) + hr;
 
 		int tempoParaAtentimento = chamado.getFila().getSla().getTempoDeAtendimento();
-
-		if (hrsUteis > tempoParaAtentimento) {
-			chamado.setStatus(StatusChamado.ESTOROU_SLA);
-		}
 		
 		chamado.setHoras(hrsUteis);
 		
@@ -161,7 +157,7 @@ public class SlaUtilNivelBaixo extends SlaUtil {
 	 */
 	private int diasUteis(LocalDate dataDoChamado, LocalDate dataDeHoje) {
 		int diasUteis = 0;
-		// percorro as data ferificando se sao dias uteis
+		/** percorro as data ferificando se sao dias uteis */
 		while (dataDoChamado.isBefore(dataDeHoje)) {
 
 			if (!isFimDeSemana(dataDoChamado)) {
