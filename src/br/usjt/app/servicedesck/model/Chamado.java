@@ -17,12 +17,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @Entity
 @NamedQueries(value={
 	@NamedQuery(name="Chamado.porPrioridade",query="SELECT DISTINCT(cmd) FROM Chamado cmd LEFT JOIN FETCH cmd.fila ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC"),
-	@NamedQuery(name="Chamado.porPrioridadePorSolicitante",query="SELECT cmd FROM Chamado cmd LEFT JOIN FETCH cmd.fila  WHERE cmd.solicitante.id = :idSolicitante ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC")
+	@NamedQuery(name="Chamado.porPrioridadePorSolicitante",query="SELECT cmd FROM Chamado cmd LEFT JOIN FETCH cmd.fila  WHERE cmd.solicitante.id = :idSolicitante ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC"),
+	@NamedQuery(name="Chamado.porPrioridadePorFila",query="SELECT cmd FROM Chamado cmd LEFT JOIN FETCH cmd.fila  WHERE cmd.fila.id = :idFila AND cmd.status != :status1 AND cmd.status != :status2 ORDER BY cmd.fila.sla.nivel , cmd.dataDeAbertura ASC")
+	
 })
 public class Chamado implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -78,16 +79,6 @@ public class Chamado implements Serializable {
 	}
 
 	public StatusChamado getStatus() {
-//		if(status != null){
-//			return status;
-//		}
-//			
-//		if(status == null && dataDeFechamento == null){
-//			return StatusChamado.ABERTO;
-//		} else {
-//			// if(status == null && dataDeFechamento != null)
-//			return StatusChamado.FECHADO;
-//		}
 		return status;
 	}
 

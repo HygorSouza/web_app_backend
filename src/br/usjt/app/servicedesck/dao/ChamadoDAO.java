@@ -112,5 +112,22 @@ public class ChamadoDAO {
 		query.setParameter("id", chamado.getId());
 		query.executeUpdate();
 	}
+	//TODO this
+	public List<Chamado> listarPorFila(Long idFila) {
+		//String jpql = "SELECT c FROM Chamado c WHERE  c.fila.id = :idFila AND c.status != :status1  AND c.status != :status2";
+		TypedQuery<Chamado> query = manager.createNamedQuery("Chamado.porPrioridadePorFila", Chamado.class);
+		query.setParameter("idFila", idFila);
+		query.setParameter("status1", StatusChamado.CANCELADO);
+		query.setParameter("status2", StatusChamado.FECHADO);
+		return query.getResultList();
+	}
+
+	public void avaliar(Chamado chamado) {
+		String jpql = "UPDATE Chamado c SET c.status = :status WHERE c.id = :id";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("status", chamado.getStatus());
+		query.setParameter("id", chamado.getId());
+		query.executeUpdate();
+	}
 	
 }

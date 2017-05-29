@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Usuario implements Serializable {
@@ -36,11 +37,11 @@ public class Usuario implements Serializable {
 
 	@NotNull
 	@Column(unique = true)
-	@JsonIgnore
+	
 	private String username;
 
 	@NotNull
-	@JsonIgnore
+	
 	private String password;
 
 	@NotNull
@@ -121,7 +122,7 @@ public class Usuario implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}

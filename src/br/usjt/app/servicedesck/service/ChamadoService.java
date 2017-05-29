@@ -14,7 +14,11 @@ import br.usjt.app.servicedesck.model.StatusChamado;
 import br.usjt.app.servicedesck.model.Usuario;
 import br.usjt.app.servicedesck.util.SlaUtil;
 import br.usjt.app.servicedesck.util.SlaUtilFactory;
-
+/**
+ * 
+ * @author 
+ * @version 2.0.0
+ */
 @Service
 public class ChamadoService {
 	private ChamadoDAO dao;
@@ -74,8 +78,8 @@ public class ChamadoService {
 	}
 
 	/**
-	 * Metodo que retorna uma lista de chamados, retornado do DAO. Author:
-	 * Rafael
+	 * Metodo que retorna uma lista de chamados, retornado do DAO.
+	 * @author Rafael
 	 */
 	public List<Chamado> pesquisar(String pesquisa, Long id) {
 
@@ -90,6 +94,13 @@ public class ChamadoService {
 		} else {
 			lista = dao.pesquisar(pesquisa);
 		}
+		sla(lista);
+		return lista;
+	}
+	
+	//TODO this
+	public List<Chamado> listarPorFila(Long idFila) {
+		List<Chamado> lista = dao.listarPorFila(idFila);
 		sla(lista);
 		return lista;
 	}
@@ -137,5 +148,9 @@ public class ChamadoService {
 	public void cancelarChamado(Chamado chamado) {
 		chamado.setStatus(StatusChamado.CANCELADO);
 		dao.cancelarChamado(chamado);
+	}
+
+	public void avaliar(Chamado chamado) {
+		dao.avaliar(chamado);
 	}
 }
