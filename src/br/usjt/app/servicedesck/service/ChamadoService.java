@@ -151,6 +151,14 @@ public class ChamadoService {
 	}
 
 	public void avaliar(Chamado chamado) {
-		dao.avaliar(chamado);
+		if( chamado.getStatus().equals(StatusChamado.FECHADO) ){
+			
+			Chamado c = consultar(chamado.getId());
+			c.setDataDeFechamento(Calendar.getInstance());
+			c.setStatus(StatusChamado.FECHADO);
+			c.setSolucionador(chamado.getSolucionador());
+		}else{
+			dao.avaliar(chamado);
+		}
 	}
 }

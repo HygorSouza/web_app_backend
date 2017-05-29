@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.usjt.app.servicedesck.model.Chamado;
+import br.usjt.app.servicedesck.model.StatusChamado;
 import br.usjt.app.servicedesck.service.ChamadoService;
 
 //TODO this
@@ -51,7 +52,7 @@ public class ChamadoRestController {
 	}
 	
 	@Transactional
-	@RequestMapping(method=RequestMethod.POST, value="rest/chamado/avaliar")
+	@RequestMapping(method=RequestMethod.PUT, value="rest/chamado/avaliar")
 	public ResponseEntity<Chamado> avaliarChamado(@RequestBody Chamado chamado){
 		try{
 			chamadoService.avaliar(chamado);

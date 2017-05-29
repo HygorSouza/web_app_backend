@@ -123,9 +123,10 @@ public class ChamadoDAO {
 	}
 
 	public void avaliar(Chamado chamado) {
-		String jpql = "UPDATE Chamado c SET c.status = :status WHERE c.id = :id";
+		String jpql = "UPDATE Chamado c SET c.status = :status , c.solucionador.id = :idSolucionador WHERE c.id = :id";
 		Query query = manager.createQuery(jpql);
 		query.setParameter("status", chamado.getStatus());
+		query.setParameter("idSolucionador", chamado.getSolucionador().getId());
 		query.setParameter("id", chamado.getId());
 		query.executeUpdate();
 	}
