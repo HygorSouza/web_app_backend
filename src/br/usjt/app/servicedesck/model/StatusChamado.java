@@ -3,6 +3,10 @@ package br.usjt.app.servicedesck.model;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Hygor 
+ * @version 2.0.0 
+ */
 public enum StatusChamado {
 	ABERTO("Aberto"),
 	FECHADO("Fechado"),
@@ -21,9 +25,17 @@ public enum StatusChamado {
 	public String getStatus() {
 		return status;
 	}
-	
-	
+
 	public static List<StatusChamado> getList(){
-		return Arrays.asList(StatusChamado.ABERTO , StatusChamado.FECHADO , StatusChamado.CANCELADO , StatusChamado.TROCA_DE_EQUIPAMENTO, StatusChamado.ESTOROU_SLA);
+		return Arrays.asList(StatusChamado.ABERTO , StatusChamado.FECHADO , StatusChamado.CANCELADO , StatusChamado.TROCA_DE_EQUIPAMENTO);
+	}
+	
+	/**
+	 * @author Rafael
+	 * retorna a lista sem o status aberto e estourou sla
+	 * @return
+	 */
+	public static List<StatusChamado> getListaSemAbertoESla(){
+		return Arrays.asList(StatusChamado.FECHADO, StatusChamado.TROCA_DE_EQUIPAMENTO);
 	}
 }

@@ -4,6 +4,7 @@ package br.usjt.app.servicedesck.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @NamedQueries(value={
@@ -37,6 +39,13 @@ public class Chamado implements Serializable {
 
 	@NotNull
 	private String descricao;
+	
+	@Size(max=128)
+	private String motivoAvaliacao;
+	
+	@NotNull
+	@Column(unique = true)
+	private String codigo;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -142,6 +151,22 @@ public class Chamado implements Serializable {
 		return this.horas;
 	}
 	
+	public String getMotivoAvaliacao() {
+		return motivoAvaliacao;
+	}
+
+	public void setMotivoAvaliacao(String motivoAvaliacao) {
+		this.motivoAvaliacao = motivoAvaliacao;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 	public int percentual(){
 		int resultado = 0;
 		if(horas == 0){

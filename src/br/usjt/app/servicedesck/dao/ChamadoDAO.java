@@ -59,6 +59,20 @@ public class ChamadoDAO {
 	
 	/**
 	 * @author Rafael
+	 * O metodo recebe duas datas e pesquisa por chamados realizados entre essas datas da fila 
+	 * passada pelo parametro  
+	 */
+	public List<Chamado> listarPorDataAberturaFechamento(Date dataAbertura, Date dataFechamento, Long idFila){
+		String jpql = "SELECT c FROM Chamado c WHERE c.dataDeAbertura >= :dataAbertura AND c.dataDeAbertura <= :dataFechamento AND c.fila.id = :idFila";
+		TypedQuery<Chamado> query = manager.createQuery(jpql, Chamado.class);
+		query.setParameter("dataAbertura", dataAbertura, TemporalType.DATE);
+		query.setParameter("dataFechamento", dataFechamento, TemporalType.DATE);
+		query.setParameter("idFila", idFila);
+		return query.getResultList();
+	}
+	
+	/**
+	 * @author Rafael
 	 * O metodo recebe duas datas e pesquisa por chamados realizados entre essas datas
 	 */
 	public List<Chamado> listarPorDataAberturaFechamento(Date dataAbertura, Date dataFechamento){
@@ -100,6 +114,21 @@ public class ChamadoDAO {
 		query.setParameter("idFila", fila);
 		return query.getResultList();
 	}
+	
+	public boolean gerarCodigo(String codigo) {
+		boolean valido = false;
+		String jpql = "SELECT c FROM Chamado c WHERE c.codigo = :codigo";
+		TypedQuery<Chamado> query = manager.createQuery(jpql, Chamado.class);
+		query.setParameter("codigo", codigo);
+		try {
+			Chamado chamado = query.getSingleResult();
+			valido = chamado != null;
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
+		return valido;
+	}
+	
 	/**
 	 * @author Hygor S.
 	 * 
@@ -112,6 +141,7 @@ public class ChamadoDAO {
 		query.setParameter("id", chamado.getId());
 		query.executeUpdate();
 	}
+	
 	//TODO this
 	public List<Chamado> listarPorFila(Long idFila) {
 		//String jpql = "SELECT c FROM Chamado c WHERE  c.fila.id = :idFila AND c.status != :status1  AND c.status != :status2";
@@ -123,10 +153,11 @@ public class ChamadoDAO {
 	}
 
 	public void avaliar(Chamado chamado) {
-		String jpql = "UPDATE Chamado c SET c.status = :status , c.solucionador.id = :idSolucionador WHERE c.id = :id";
+		String jpql = "UPDATE Chamado c SET c.status = :status , c.solucionador.id = :idSolucionador, c.motivoAvaliacao = :motivoAvaliacao WHERE c.id = :id";
 		Query query = manager.createQuery(jpql);
 		query.setParameter("status", chamado.getStatus());
 		query.setParameter("idSolucionador", chamado.getSolucionador().getId());
+		query.setParameter("motivoAvaliacao", chamado.getMotivoAvaliacao());
 		query.setParameter("id", chamado.getId());
 		query.executeUpdate();
 	}

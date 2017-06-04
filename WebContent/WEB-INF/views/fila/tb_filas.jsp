@@ -47,8 +47,8 @@
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div class="row col-md-12">
-			<label>Fila de atendimento não encontrada</label>
+		<div class="row col-md-12 form-group">
+			<label class="form-group">Fila de atendimento não encontrada</label>
 		</div>
 	</c:otherwise>
 </c:choose>

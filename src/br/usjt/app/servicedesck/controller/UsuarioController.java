@@ -51,6 +51,17 @@ public class UsuarioController {
 		return "usuario/criar_solicitante";
 	}
 	
+	
+	/**
+	 * @author Oscar
+	 * @return
+	 */
+	@RequestMapping("editar_senha")
+	public String alterarSenha() {
+		return "usuario/alterar_senha";
+	}
+	
+	
 	/**
 	 * @author Hygor S.
 	 * @return O jsp que sera rederizado pelo navegador
@@ -126,14 +137,19 @@ public class UsuarioController {
 	@RequestMapping("atualizar_usuario")
 	public String atualizarUsuario(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("usuario", usuarioService.consultar(id));
-		return "usuario/lista_de_usuarios";
+		return "usuario/atualizar_usuario";
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 
 	@RequestMapping("alterar_usuario")
 	public String alterarUsuario(Usuario user) {
 		usuarioService.excluir(user);
 		return "usuario/lista_de_usuarios";
-	}
+	}*/
 
 	/**
 	 * @author Rafael

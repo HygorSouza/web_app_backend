@@ -3,6 +3,7 @@ package br.usjt.app.servicedesck.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,91 @@ public class ChamadoService {
 		this.dao = dao;
 		this.daoUsuario = daoUsuario;
 	}
+	
+	/**
+	 * @author note-hugo
+	 * @param dataAbertura
+	 * @param dataFechamento
+	 * @param idFila
+	 * Lista por data para o solucionador, listando todos os chamados entre aquelas datas somente da 
+	 * d
+	 * @return
+	 */
+	public List<Chamado> listarPorData(Date dataAbertura, Date dataFechamento, Long idFila) {
+		List<Chamado> lista = dao.listarPorDataAberturaFechamento(dataAbertura, dataFechamento, idFila);
+		sla(lista);
+		return lista;
+	}
+	
+	/**
+	 * @author note-hugo
+	 * @param dataAbertura
+	 * @param dataFechamento
+	 * @param idFila
+	 * @return
+	 * 
+	 * Lista por data para o administrador, listando todos os chamados do sistema
+	 */
+	public List<Chamado> listarPorData(Date dataAbertura, Date dataFechamento) {
+		List<Chamado> lista = dao.listarPorDataAberturaFechamento(dataAbertura, dataFechamento);
+		sla(lista);
+		return lista;
+	}
+	
+	/**
+	 * @author Rafael
+	 * gera uma string de 8 digitos e chama o metodo do dao verificar se a string já existe no banco
+	 * @return uma string disponivel
+	 */
+	public String gerarCodigo(){
+		String gerada;
+		boolean flag = false;
+	
+			do {
+				
+				UUID uuid = UUID.randomUUID();
+				gerada = uuid.toString();
+				gerada = gerada.substring(0,6);
+				dao.gerarCodigo(gerada);
+				System.out.println(flag);
+				
+					
+			}while(flag == true);
+	
+		
+		return gerada;
+	}
+
+	public void criar(Chamado chamado) {
+		chamado.setStatus(StatusChamado.ABERTO);
+		chamado.setDataDeAbertura(Calendar.getInstance());
+
+		dao.registrar(chamado);
+	}
+
+	/**
+	 * Metodo que retorna uma lista de chamados, retornado do DAO.
+	 * 
+	 * @Author Rafael
+	 */
+	public List<Chamado> pesquisar(String pesquisa) {
+		List<Chamado> lista = dao.pesquisar(pesquisa);
+		sla(lista);
+		return lista;
+	}
+
+
+	/**
+	 * Esse metodo chama o dao passando o id do usuario para pesquisar todos os
+	 * chamados que ele realizou
+	 * 
+	 * @Author Rafael
+	 */
+	public List<Chamado> consultarChamadosFeitos(Long id) {
+		List<Chamado> lista = dao.consultarChamadosFeitos(id);
+		sla(lista);
+		return lista;
+	}
 
 	/**
 	 * Metodo que passa o id para o dao para retornar o chamado dono do id
@@ -41,32 +127,8 @@ public class ChamadoService {
 		return c;
 	}
 
-	public List<Chamado> listarPorData(Date dataAbertura, Date dataFechamento) {
-		List<Chamado> lista = dao.listarPorDataAberturaFechamento(dataAbertura, dataFechamento);
-		sla(lista);
-		return lista;
-	}
-
-	public void criar(Chamado chamado) {
-		chamado.setStatus(StatusChamado.ABERTO);
-		chamado.setDataDeAbertura(Calendar.getInstance());
-
-		dao.registrar(chamado);
-	}
-
 	public List<Chamado> listar(Long id, StatusChamado status) {
 		List<Chamado> lista = dao.listar(id, status);
-		sla(lista);
-		return lista;
-	}
-
-	/**
-	 * Metodo que retorna uma lista de chamados, retornado do DAO.
-	 * 
-	 * @Author Rafael
-	 */
-	public List<Chamado> pesquisar(String pesquisa) {
-		List<Chamado> lista = dao.pesquisar(pesquisa);
 		sla(lista);
 		return lista;
 	}
@@ -101,18 +163,6 @@ public class ChamadoService {
 	//TODO this
 	public List<Chamado> listarPorFila(Long idFila) {
 		List<Chamado> lista = dao.listarPorFila(idFila);
-		sla(lista);
-		return lista;
-	}
-
-	/**
-	 * Esse metodo chama o dao passando o id do usuario para pesquisar todos os
-	 * chamados que ele realizou
-	 * 
-	 * @Author Rafael
-	 */
-	public List<Chamado> consultarChamadosFeitos(Long id) {
-		List<Chamado> lista = dao.consultarChamadosFeitos(id);
 		sla(lista);
 		return lista;
 	}
@@ -160,5 +210,9 @@ public class ChamadoService {
 		}else{
 			dao.avaliar(chamado);
 		}
+	}
+	
+	public List<Chamado> pesquisarChamadosSolicitante(String pesquisar, Long id){
+		return dao.pesquisarChamadosSolicitante(pesquisar, id);
 	}
 }

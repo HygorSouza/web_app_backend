@@ -38,7 +38,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/minhaConta">Ver meus perfil</a></li>
-							<li><a href="<%=request.getContextPath()%>/atualizar_senha">Editar Senha</a></li>
+							<li><a href="<%=request.getContextPath()%>/usuario/editar_senha">Editar Senha</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<%=request.getContextPath()%>/logout">Sair </a></li>
 						</ul>

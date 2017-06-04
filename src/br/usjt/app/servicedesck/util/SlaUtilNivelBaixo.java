@@ -60,7 +60,7 @@ public class SlaUtilNivelBaixo extends SlaUtil {
 		// calculo a quantidade de horas uteis que passaram
 		int hrsUteis = diasUteis(dataDoChamado,dataDeHoje) * (max - min) + hr;
 
-		int tempoParaAtentimento = chamado.getFila().getSla().getTempoDeAtendimento();
+		//int tempoParaAtentimento = chamado.getFila().getSla().getTempoDeAtendimento();
 		
 		chamado.setHoras(hrsUteis);
 		

@@ -37,7 +37,7 @@ public class ChamadoController {
 		this.filaService = filaService;
 	}
 
-	/*
+	/**
 	 * Redireciona o usuário para a tela de criar chamado, e passa todas as
 	 * filas do sistema para a jsp pelo model
 	 */
@@ -47,7 +47,7 @@ public class ChamadoController {
 		return "chamado/criar_chamado";
 	}
 
-	/*
+	/**
 	 * Pega o chamado realizado pelo parametro Chamado, instancia uma sessão e
 	 * pega o usuário que está logado na sessão e passa o usuário da sessão para
 	 * o IdSolicitante, para gravar o usuário que abriu o chamado.
@@ -56,7 +56,7 @@ public class ChamadoController {
 	public String criarChamado(Chamado chamado, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
-
+		chamado.setCodigo(chamadoService.gerarCodigo());
 		chamado.setSolicitante(user);
 		chamadoService.criar(chamado);
 
@@ -87,7 +87,7 @@ public class ChamadoController {
 		model.addAttribute("filas", listaFila);
 		model.addAttribute("status", listaStatus);
 		model.addAttribute("listaChamado", listaChamado);
-	
+
 		return "chamado/listar_chamado";
 	}
 
@@ -131,15 +131,23 @@ public class ChamadoController {
 	/**
 	 * Este metodo recebe um id que irá passar para o service para trazer a
 	 * postagem que foi escolhida pelo usuario
+	 * vai Atualizar o chamado com a avaliação do solucionador.
 	 * 
-	 * @Author Rafael
+	 * @Author Rafael, Oscar
 	 */
 	@RequestMapping("atualizar_chamado")
 	public String atualizarChamado(@RequestParam("statusChamado") StatusChamado status, @RequestParam("id") long id,
-			Model model) {
+			@RequestParam(value = "motivoAvaliacao") String motivoAvaliacao, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
+		
 		Chamado chamado = chamadoService.consultar(id);
+		chamado.setSolucionador(user);
 		chamado.setStatus(status);
-		chamado.setDataDeFechamento(Calendar.getInstance());
+		chamado.setMotivoAvaliacao(motivoAvaliacao);
+		if(status.equals(StatusChamado.FECHADO)){ //TODO melhorar isso 
+			chamado.setDataDeFechamento(Calendar.getInstance());
+		}
 		chamadoService.atualizar(chamado);
 		model.addAttribute(chamado);
 
@@ -153,7 +161,7 @@ public class ChamadoController {
 	 * @Author Rafael
 	 */
 	@RequestMapping("pesquisar_data")
-	public String pesquisarData(@RequestParam("dataAbertura")String dataAbertura, @RequestParam("dataFechamento")String dataFechamento, Model model) {
+	public String pesquisarData(@RequestParam("dataAbertura")String dataAbertura, HttpServletRequest request, @RequestParam("dataFechamento")String dataFechamento, Model model) {
 	
 		
 		Date dataInicio = null;
@@ -167,28 +175,35 @@ public class ChamadoController {
 				System.out.println("erro na data, metodo pesquisarData dentro do ChamadoController");
 			e.printStackTrace();
 		}
-			
-		List<Chamado> lista = chamadoService.listarPorData(dataInicio, dataFim);
+		
+		HttpSession session = request.getSession();
+		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
+		List<Chamado> lista;
+		if(user.getTipo() == 1){
+			 lista = chamadoService.listarPorData(dataInicio, dataFim, user.getFila().getId());
+	    }else{
+	    	 lista = chamadoService.listarPorData(dataInicio, dataFim);
+	    }
 		model.addAttribute("listaChamado", lista);
 		model.addAttribute("filas", filaService.listar());
 		List<StatusChamado> listaStatus = StatusChamado.getList();
 		model.addAttribute("status", listaStatus);
 		return "chamado/listar_chamado";
 	}
-	 
-	 @RequestMapping("listar_chamadoUsuario")
-		public String listaUsuarioChamado(Long id, Model model) {
 
-			List<Chamado> listaSolicitante = chamadoService.consultarChamadosFeitos(id);
-			model.addAttribute("listaSolicitante", listaSolicitante);
-			return "usuario/chamado_usuario";
-		}
+	@RequestMapping("listar_chamadoUsuario")
+	public String listaUsuarioChamado(Long id, Model model) {
+
+		List<Chamado> listaSolicitante = chamadoService.consultarChamadosFeitos(id);
+		model.addAttribute("listaSolicitante", listaSolicitante);
+		return "usuario/chamado_usuario";
+	}
 
 	@RequestMapping("avaliar_chamado")
 	public String avaliarChamado(Long id, Model model) {
 		Chamado chamado = chamadoService.consultar(id);
 
-		List<StatusChamado> listaStatus = StatusChamado.getList();
+		List<StatusChamado> listaStatus = StatusChamado.getListaSemAbertoESla();
 		model.addAttribute("listaStatus", listaStatus);
 		model.addAttribute("chamado", chamado);
 		return "chamado/avaliar_chamado";

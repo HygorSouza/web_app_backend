@@ -16,8 +16,8 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					
-					<li><a href="novo_chamado">Novo Chamado</a></li>
-					<li><a href="listar_chamado">Listar Chamado</a></li>
+					<li><a href="<%=request.getContextPath()%>/novo_chamado">Novo Chamado</a></li>
+					<li><a href="<%=request.getContextPath()%>/listar_chamado">Listar Chamado</a></li>
 					
 					
 			
@@ -26,10 +26,10 @@
 							class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="dropdown-menu">
 				
-							<li><a href="minhaConta">Ver meus perfil</a></li>
-							<li><a href="atualizar_senha">Editar Senha</a></li>
+							<li><a href="<%=request.getContextPath()%>/usuario/minhaConta">Ver meus perfil</a></li>
+							<li><a href="<%=request.getContextPath()%>/usuario/editar_senha">Editar Senha</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="logout">Sair </a></li>
+							<li><a href="<%=request.getContextPath()%>/logout">Sair </a></li>
 						</ul></li>
 				</ul>
 			</div>

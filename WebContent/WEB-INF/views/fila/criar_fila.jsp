@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			
-			<div class="input-group col-md-6">
+			<div class="input-group col-md-6 form-group">
 				<div class="input-group-addon">
 						<span>Nivel da SLA</span>
 				</div>

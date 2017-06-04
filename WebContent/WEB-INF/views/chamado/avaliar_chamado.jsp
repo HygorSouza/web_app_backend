@@ -12,97 +12,150 @@
 <body>
 	<myTag:menu url="../" />
 	<div class="container">
-		<form action="atualizar_chamado">
+		<div class="row">
+			<form class="form-horizontal" action="atualizar_chamado">
+				<input type="hidden" name="id" id="id" value="${chamado.id}">
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="cpf">Código:</label>
+					<div class="col-md-6">
 
-			<input type="hidden" name="id" id="id" value="${chamado.id}">
-			<div class="row col-md-12">
+						<label class="form-control"> ${chamado.codigo} </label>
+					</div>
+				</div>
 
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="fullname">Titulo:</label>
+					<div class="col-md-6">
+
+						<label class="form-control">${chamado.breveDescricao} </label>
+
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="cpf">Descrição:</label>
+					<div class="col-md-6">
+
+						<label class="form-control"> ${chamado.descricao} </label>
+					</div>
+				</div>
 
 				<div class="form-group">
-					<div class="input-group col-md-8">
-						<div class="input-group-addon">
-							<span>Titulo:</span>
-						</div>
-						<input type=text disabled="disabled"
-							value="${chamado.breveDescricao}" />
+					<label class="col-md-4 control-label" for="cpf">Status:</label>
+					<div class="col-md-6">
+						<label class="form-control"> ${chamado.status.status} </label>
 					</div>
 				</div>
+
+				<c:choose>
+					<c:when test="${not empty chamado.dataDeAbertura}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="cpf">Data de
+								Abertura:</label>
+							<div class="col-md-6">
+								<label class="form-control"><fmt:formatDate
+										value="${chamado.dataDeAbertura.time}"
+										pattern="dd/MM/yyyy HH:mm:ss" /> </label>
+
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${not empty chamado.dataDeFechamento}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="cpf">Data de
+								Fechamento:</label>
+							<div class="col-md-6">
+								<label class="form-control"><fmt:formatDate
+										value="${chamado.dataDeFechamento.time}"
+										pattern="dd/MM/yyyy HH:mm:ss" /> </label>
+
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
+
 				<div class="form-group">
-					<div class="input-group col-md-4">
-						<div class="input-group-addon">
-							<span>Descrição:</span>
-						</div>
-						<input type=text disabled="disabled" value="${chamado.descricao}" />
+					<label class="col-md-4 control-label" for="cpf">Fila:</label>
+					<div class="col-md-6">
+						<label class="form-control"> ${chamado.fila.nome} </label>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group col-md-4">
-					<div class="input-group-addon">
-						<span>Status:</span>
-					</div>
+				<c:choose>
+					<c:when test="${usuario_logado.tipo == 1}">
+						<c:choose>
+							<c:when test="${empty chamado.dataDeFechamento}">
 
-					<input type=text disabled="disabled" value="${chamado.status}" />
-				</div>
-			</div>
-			<c:choose>
-				<c:when test="${not empty chamado.dataDeAbertura}">
-					<div class="form-group">
-						<div class="input-group col-md-4">
-							<div class="input-group-addon">
-								<span>Data De Abertura:</span>
-							</div>
 
-							<input type=text disabled="disabled"
-								value="<fmt:formatDate value="${chamado.dataDeAbertura.time}"
-												pattern="dd-MM-yyyy HH:mm:ss" />" />
-						</div>
-					</div>
-				</c:when>
-			</c:choose>
-			<c:choose>
-				<c:when test="${not empty chamado.dataDeFechamento}">
-					<div class="form-group">
-						<div class="input-group col-md-4">
-							<div class="input-group-addon">
-								<span>Data De Fechamento:</span>
-							</div>
-							<input type=text disabled="disabled"
-								value="<fmt:formatDate value="${chamado.dataDeFechamento.time}"
-												pattern="dd-MM-yyyy HH:mm:ss" />" />
-						</div>
-					</div>
-				</c:when>
-			</c:choose>
-			<div class="form-group">
-				<div class="input-group col-md-4">
-					<div class="input-group-addon">
-						<span>Fila:</span>
-					</div>
-					<input type=text disabled="disabled" value="${chamado.fila.nome}" />
-				</div>
-			</div>
-			<c:choose>
-				<c:when test="${usuario_logado.tipo == 1}">
-					<div class="form-group">
-						<div class="input-group col-md-4">
-							<div class="input-group-addon">
-								<span>Mudar Status:</span>
-							</div>
-							<select name="statusChamado" class="form-control" id="sel1">
-								<c:forEach var="status" items="${listaStatus}">
-									<option value="${status}">${status}</option>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="motivoAvaliacao">Motivo
+										da Avaliação:</label>
+									<div class="col-md-6">
+										<textarea class="form-control" name="motivoAvaliacao"
+											id="motivoAvaliacao" rows="5" name="descricao" required></textarea>
+									</div>
+								</div>
 
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary" />
-					</div>
-				</c:when>
-			</c:choose>
-		</form>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="statusChamado">Novo
+										Status:</label>
+									<div class="col-md-6">
+										<select name="statusChamado" class="form-control" id="sel1">
+											<c:forEach var="status" items="${listaStatus}">
+												<option value="${status}">${status.status}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
+					</c:when>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${not empty chamado.dataDeFechamento}">
+
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="cpf">Nome do
+								avaliador:</label>
+							<div class="col-md-6">
+								<label class="form-control">
+									${chamado.solucionador.nome} </label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" >Motivo da
+								Avaliação:</label>
+							<div class="col-md-6">
+								<textarea class="form-control" rows="5" name="descricao"
+									disabled>  ${chamado.motivoAvaliacao}
+							</textarea>
+							</div>
+						</div>
+
+					</c:when>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${empty chamado.dataDeFechamento}">
+						<!-- Button (Double) -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="btnsalvar"></label>
+							<div class="col-md-8">
+								<button id="btnsalvar" name="btnsalvar" class="btn btn-primary">Salvar</button>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
+			</form>
+		</div>
 	</div>
+	<myTag:script/>
 </body>
 </html>

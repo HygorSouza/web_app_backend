@@ -8,7 +8,7 @@
   </c:when>
   
   <c:when test="${usuario_logado.tipo eq 1}">
-  	<jsp:include page="${url}header_sucionador.jsp" />
+  	<jsp:include page="${url}header_solucionador.jsp" />
   </c:when>
   
   <c:otherwise>

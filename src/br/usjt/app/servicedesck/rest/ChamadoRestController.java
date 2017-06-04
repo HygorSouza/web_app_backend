@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.usjt.app.servicedesck.model.Chamado;
-import br.usjt.app.servicedesck.model.StatusChamado;
 import br.usjt.app.servicedesck.service.ChamadoService;
 
 //TODO this
@@ -50,6 +49,13 @@ public class ChamadoRestController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="rest/chamado/pesquisar/{codigo}/{idUsuario}")
+	public @ResponseBody List<Chamado> pesquisarPorCodigo( @PathVariable("codigo") String codigo , @PathVariable("idUsuario") Long idUsuario ){
+		System.out.println(codigo+" -> "+ idUsuario);
+		return chamadoService.pesquisarChamadosSolicitante(codigo, idUsuario);
+	}
+	
 	
 	@Transactional
 	@RequestMapping(method=RequestMethod.PUT, value="rest/chamado/avaliar")
@@ -100,5 +106,6 @@ public class ChamadoRestController {
 			return new ResponseEntity<Chamado>(chamado, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 	
 }
