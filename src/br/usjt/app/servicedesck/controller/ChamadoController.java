@@ -56,7 +56,6 @@ public class ChamadoController {
 	public String criarChamado(Chamado chamado, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute(LoginController.USUARIO_LOGADO);
-		chamado.setCodigo(chamadoService.gerarCodigo());
 		chamado.setSolicitante(user);
 		chamadoService.criar(chamado);
 

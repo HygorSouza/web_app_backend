@@ -54,7 +54,7 @@ public class SlaUtilTest {
 	// @After
 	// public void tearDown() throws Exception {
 	// }
-	@Ignore
+	
 	@Test(timeout=60000L)
 	public void test00ContabilizarSlaDeNivelBaixo() {
 		String msg = "chamado com sla contabilizado com sucesso sem estourar sla";
@@ -65,7 +65,7 @@ public class SlaUtilTest {
 		System.out.println(chamado.percentual());
 		assertEquals(msg, esperado,chamado.percentual());
 	}
-	@Ignore
+	
 	@Test(timeout=60000L)
 	public void test00ContabilizarSlaDeNivelCritico() {
 		String msg = "chamado com sla contabilizado com sucesso sem estourar sla";
@@ -86,7 +86,7 @@ public class SlaUtilTest {
 		
 		assertEquals(msg, esperado, chamado.percentual());
 	}
-	@Ignore
+	
 	@Test(timeout=60000L)
 	public void test01ContabilizarSla() {
 		String msg = "chamado com sla contabilizado com sucesso estourando sla";
@@ -104,7 +104,7 @@ public class SlaUtilTest {
 		
 		assertEquals(msg, esperado,chamado.percentual());
 	}
-	@Ignore
+	
 	@Test
 	//@Test(timeout=60000L)
 	public void test02ContabilizarSla() {
@@ -126,7 +126,7 @@ public class SlaUtilTest {
 		System.out.println(chamado.percentual());
 		assertEquals(msg, esperado,chamado.percentual());
 	}
-	@Ignore
+	
 	@Test(expected = RuntimeException.class)
 	public void test03ContabilizarSlaComNivelInvalido() {
 		int nivel = 7;

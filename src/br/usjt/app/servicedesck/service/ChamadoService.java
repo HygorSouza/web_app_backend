@@ -87,6 +87,7 @@ public class ChamadoService {
 
 	public void criar(Chamado chamado) {
 		chamado.setStatus(StatusChamado.ABERTO);
+		chamado.setCodigo(gerarCodigo());
 		chamado.setDataDeAbertura(Calendar.getInstance());
 
 		dao.registrar(chamado);

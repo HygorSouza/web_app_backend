@@ -182,8 +182,8 @@ public class Chamado implements Serializable {
 		String msg;
 		if(percentual() < 35){
 			msg = "";
-		} else if( percentual() <= 55){
-			msg = "info";
+		} else if( percentual() < 75){
+			msg = "warning";
 		} else  if(percentual() < 100){
 			msg = "warning";
 		} else{
